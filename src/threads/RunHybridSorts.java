@@ -2,6 +2,7 @@ package threads;
 
 import main.ArrayVisualizer;
 import sorts.BinaryMergeSort;
+import sorts.SwapMergeSort;
 import sorts.BottomUpMergeSort;
 import sorts.BranchedPDQSort;
 import sorts.BranchlessPDQSort;
@@ -50,6 +51,7 @@ final public class RunHybridSorts extends MultipleSortThread {
     private Sort HybridCombSort;
     private Sort IntroCircleSort;
     private Sort BinaryMergeSort;
+    private Sort SwapMergeSort;
     private Sort WeaveMergeSort;
     private Sort TimSort;
     private Sort CocktailMergeSort;
@@ -70,6 +72,7 @@ final public class RunHybridSorts extends MultipleSortThread {
         HybridCombSort              = new              HybridCombSort(Delays, Highlights, Reads, Writes);
         IntroCircleSort             = new             IntroCircleSort(Delays, Highlights, Reads, Writes);
         BinaryMergeSort             = new             BinaryMergeSort(Delays, Highlights, Reads, Writes);
+        SwapMergeSort               = new               SwapMergeSort(Delays, Highlights, Reads, Writes);
         WeaveMergeSort              = new              WeaveMergeSort(Delays, Highlights, Reads, Writes);
         TimSort                     = new                     TimSort(Delays, Highlights, Reads, Writes);
         CocktailMergeSort           = new           CocktailMergeSort(Delays, Highlights, Reads, Writes);
@@ -88,6 +91,7 @@ final public class RunHybridSorts extends MultipleSortThread {
         RunHybridSorts.this.runIndividualSort(HybridCombSort,              0, array, 1024, 1);
         RunHybridSorts.this.runIndividualSort(IntroCircleSort,             0, array, 1024, 1);
         RunHybridSorts.this.runIndividualSort(BinaryMergeSort,             0, array, 2048, 1);
+        RunHybridSorts.this.runIndividualSort(SwapMergeSort,               0, array, 2048, 1);
         RunHybridSorts.this.runIndividualSort(WeaveMergeSort,              0, array, 2048, ArrayManager.getShuffle() == Shuffles.RANDOM ? 1.25 : 6);
         RunHybridSorts.this.runIndividualSort(TimSort,                     0, array, 2048, 1);
         RunHybridSorts.this.runIndividualSort(CocktailMergeSort,           0, array, 2048, 1);
