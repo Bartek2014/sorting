@@ -40,7 +40,7 @@ final public class SwapMergeSort extends Sort {
         
         this.setSortPromptID("SwapMerge");
         this.setRunAllID("SwapMerge Sort");
-        this.setReportSortID("SwapMergesort");
+        this.setReportSortID("SwapMergeSort");
         this.setCategory("Hybrid Sorts");
         this.isComparisonBased(true);
         this.isBucketSort(false);
@@ -48,6 +48,12 @@ final public class SwapMergeSort extends Sort {
         this.isUnreasonablySlow(false);
         this.setUnreasonableLimit(0);
         this.isBogoSort(false);
+    }
+
+    private void moveDown(int[] array, int start, int dest) {
+        for (int i = dest; i < start; i++) {
+            Writes.swap(array, i, start, 0.025, true, false);
+        }
     }
 
     private void merge(int[] array, int leftStart, int rightStart, int end) {
@@ -62,26 +68,16 @@ final public class SwapMergeSort extends Sort {
                 left += 1;
             }
             else {
-                // Call movedown
+                moveDown(array, right, left);
                 left += 1;
                 right += 1;
             }
-        }
-
-        if (left >= end) {
-            return;
-        }
-        else if (Reads.compare(array[left-1], array[right-1]) > 0) {
-            Writes.swap(array, left-1, right-1, 0.075, true, false);
-        }
-        else if (Reads.compare(array[left], array[right]) > 0) {
-            Writes.swap(array, left, right, 0.075, true, false);
         }
     }
 
     private void mergeRun(int[] array, int start, int mid, int end) {
         if(start == mid) return;
-        
+
         mergeRun(array, start, (mid+start)/2, mid);
         mergeRun(array, mid, (mid+end)/2, end);
 
@@ -89,7 +85,7 @@ final public class SwapMergeSort extends Sort {
             return;
         }
         else if(end - start == 32) {
-            binaryInserter.customBinaryInsert(array, start, end, 0.333);
+            binaryInserter.customBinaryInsert(array, start, Math.min(array.length, end + 1), 0.333);
         }
         else {
             merge(array, start, mid, end);
