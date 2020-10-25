@@ -49,23 +49,6 @@ final public class PartialMergeSort extends Sort {
     }
 
     private void merge(int[] array, int leftStart, int rightStart, int end) {
-        // int left = leftStart;
-        // int right = rightStart;
-
-        // while (left < right) {
-        //     if (left >= end || right >= end) {
-        //         break;
-        //     }
-        //     else if (Reads.compare(array[left], array[right]) <= 0) {
-        //         left += 1;
-        //     }
-        //     else {
-        //         moveDown(array, right, left);
-        //         left += 1;
-        //         right += 1;
-        //     }
-        // }
-
         int[] copied = new int[rightStart - leftStart];
         for (int i = 0; i < copied.length; i++) {
             Highlights.markArray(1, i + leftStart);

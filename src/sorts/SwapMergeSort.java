@@ -75,17 +75,17 @@ final public class SwapMergeSort extends Sort {
         }
     }
 
-    private void mergeRun(int[] array, int start, int mid, int end) {
+    private void mergeRun(int[] array, int start, int mid, int end, int currentLength) {
         if(start == mid) return;
 
-        mergeRun(array, start, (mid+start)/2, mid);
-        mergeRun(array, mid, (mid+end)/2, end);
+        mergeRun(array, start, (mid+start)/2, mid, currentLength);
+        mergeRun(array, mid, (mid+end)/2, end, currentLength);
 
         if(end - start < 32) {
             return;
         }
         else if(end - start == 32) {
-            binaryInserter.customBinaryInsert(array, start, Math.min(array.length, end + 1), 0.333);
+            binaryInserter.customBinaryInsert(array, start, Math.min(currentLength, end + 1), 0.333);
         }
         else {
             merge(array, start, mid, end);
@@ -105,6 +105,6 @@ final public class SwapMergeSort extends Sort {
         int end = length;
         int mid = start + ((end - start) / 2);
         
-        mergeRun(array, start, mid, end);
+        mergeRun(array, start, mid, end, length);
     }
 }
