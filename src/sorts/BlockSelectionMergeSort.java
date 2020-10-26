@@ -98,6 +98,48 @@ final public class BlockSelectionMergeSort extends Sort {
 
         merge(array, start, end);
     }
+
+    public void moveExtraDown(int[] array, int start, int dest, int size) {
+        int amount = start - dest;
+        if (size > 1) {
+            while (amount >= size) {
+                for (int i = start; i > start - size; i--) {
+                    Writes.swap(array, i - 1, i + size - 1, 0.5, true, false);
+                }
+                start -= size;
+                amount -= size;
+            }
+            binaryInserter.customBinaryInsert(array, dest, dest + amount + size, 0.333);
+        }
+        else {
+            for (int i = start; i > dest; i--) {
+                Writes.swap(array, i, i - 1, 0.5, true, false);
+            }
+        }
+    }
+
+    public void mergeExtra(int[] array, int start, int mid, int end) {
+        int lastValue = Integer.MIN_VALUE;
+
+        while (start < mid) {
+            int size = 0;
+            for (int i = mid; i < end; i++) {
+                if (Reads.compare(array[i], array[start]) == -1 && Reads.compare(array[i], lastValue) == 1) {
+                    Highlights.markArray(1, i);
+                    size++;
+                }
+                else break;
+                Delays.sleep(1);
+            }
+            if (size > 0) {
+                moveExtraDown(array, mid, start, size);
+            }
+
+            start += size + 1;
+            mid += size;
+            lastValue = array[start - 1];
+        }
+    }
     
     @Override
     public void runSort(int[] array, int length, int bucketCount) {
@@ -115,14 +157,15 @@ final public class BlockSelectionMergeSort extends Sort {
         Writes.startLap();
         int useLength = (int)Math.pow(2, Math.floor(Math.log(length) / Math.log(2)));
         Writes.stopLap();
-        if (length > useLength) {
-            binaryInserter.customBinaryInsert(array, 0, length - useLength, 0.333);
-        }
-
+        
         int start = length - useLength;
         int end = length;
         int mid = start + ((end - start) / 2);
         
         mergeRun(array, start, mid, end, minSize);
+        if (length > useLength) {
+            runSort(array, length - useLength, bucketCount);
+            mergeExtra(array, 0, length - useLength, end);
+        }
     }
 }
