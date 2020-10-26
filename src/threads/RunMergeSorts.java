@@ -4,6 +4,7 @@ import main.ArrayVisualizer;
 import sorts.InPlaceMergeSort;
 import sorts.LazyStableSort;
 import sorts.MergeSort;
+import sorts.PartialMergeSort;
 import sorts.RotateMergeSort;
 import templates.JErrorPane;
 import templates.MultipleSortThread;
@@ -37,6 +38,7 @@ SOFTWARE.
 
 final public class RunMergeSorts extends MultipleSortThread {
     private Sort MergeSort;
+    private Sort PartialMergeSort;
     private Sort InPlaceMergeSort;
     private Sort LazyStableSort;
     private Sort RotateMergeSort;
@@ -47,6 +49,7 @@ final public class RunMergeSorts extends MultipleSortThread {
         this.categoryCount = this.sortCount;
         
         MergeSort        = new        MergeSort(Delays, Highlights, Reads, Writes);
+        PartialMergeSort = new PartialMergeSort(Delays, Highlights, Reads, Writes);
         InPlaceMergeSort = new InPlaceMergeSort(Delays, Highlights, Reads, Writes);
         LazyStableSort   = new   LazyStableSort(Delays, Highlights, Reads, Writes);
         RotateMergeSort  = new  RotateMergeSort(Delays, Highlights, Reads, Writes);
@@ -55,6 +58,7 @@ final public class RunMergeSorts extends MultipleSortThread {
     @Override
     protected synchronized void executeSortList(int[] array) throws Exception {
         RunMergeSorts.this.runIndividualSort(MergeSort,        0, array, 2048, 1.5);
+        RunMergeSorts.this.runIndividualSort(PartialMergeSort, 0, array, 2048, 1.5);
         RunMergeSorts.this.runIndividualSort(InPlaceMergeSort, 0, array, 2048, 1.75);
         RunMergeSorts.this.runIndividualSort(LazyStableSort,   0, array,  256, 0.2);
         RunMergeSorts.this.runIndividualSort(RotateMergeSort,  0, array,  512, 0.2);
