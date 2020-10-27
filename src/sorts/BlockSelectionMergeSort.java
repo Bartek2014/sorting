@@ -124,7 +124,7 @@ final public class BlockSelectionMergeSort extends Sort {
         while (start < mid) {
             int size = 0;
             for (int i = mid; i < end; i++) {
-                if (Reads.compare(array[i], array[start]) == -1 && Reads.compare(array[i], lastValue) == 1) {
+                if (Reads.compare(array[i], array[start]) == -1 && Reads.compare(array[i], lastValue) >= 0) {
                     Highlights.markArray(1, i);
                     size++;
                 }
