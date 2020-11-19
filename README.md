@@ -1,6 +1,6 @@
-# w0rthy's Array Visualizer, Revamped
-[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=Q5QLCFZ8G7WY6&currency_code=USD&source=url)
+We have moved to https://github.com/gaming32/ArrayV-v4.0!
 
+# w0rthy's Array Visualizer, Revamped
 Over 75 sorting algorithms animated with 12 unique graphic designs
 
 This new version of the program features additions inspired by Timo Bingmann's "The Sound of Sorting" and w0rthy's updates to the original visualizer.
